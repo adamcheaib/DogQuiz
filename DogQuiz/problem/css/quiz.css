@@ -22,10 +22,40 @@
     gap: 5px;
 }
 
+#game_container {
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    height: 300px;
+    gap: 10px;
+}
+
+#dog_image {
+    border-radius: 12px;
+}
+
 #choices {
     display: grid;
     grid-template-areas:
         "a a"
         "a a";
     gap: 5px;
+}
+
+.alternative {
+    border: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: wheat;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.alternative:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+.alternative:active {
+    background-color: darkgrey;
 }
