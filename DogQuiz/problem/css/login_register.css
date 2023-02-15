@@ -52,12 +52,3 @@ h1 {
 #login_button:hover {
     cursor: pointer;
 }
-
-footer {
-    text-align: left;
-    font-weight: lighter;
-    font-size: 1em;
-    padding: 1.1em;
-    align-self: end;
-    margin-top: 2vw;
-}

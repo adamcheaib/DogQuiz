@@ -9,7 +9,7 @@
     <script defer src="./js/data.js"></script>
     <script defer src="./js/index.js"></script>
     <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="./css/login_register.css">
+    <!-- <link rel="stylesheet" href="./css/login_register.css"> -->
     <link rel="stylesheet" href="./css/quiz.css">
 </head>
 
@@ -20,9 +20,14 @@
         <nav id="top_page">
             <div id="logo"></div>
             <p>Dog Breed Quiz</p>
+            <div class="quiz" id="logout">
+                Username_here
+                <button>Logout</button>
+            </div>
         </nav>
 
 
+        <!--Login/Register display-->
         <section class="login_register" id="user_interaction">
             <div id="user_inputs">
                 <h1>LOGIN</h1>
@@ -41,8 +46,28 @@
             <span>Let the magic start!</span>
 
             <button id="login_button">Login</button>
-            <p>New to this? Register for free</p>
+            <p id="test">New to this? Register for free</p>
         </section>
+
+
+        <!--Playing display-->
+        <section class="quiz" id="quiz">
+
+
+
+            <div class="quiz" id="game">
+
+                <div class="quiz" id="dog_image"></div>
+                <div class="quiz" id="choices"> </div>
+                <div class="alternative quiz"></div>
+                <div class="alternative quiz"></div>
+                <div class="alternative quiz"></div>
+                <div class="alternative quiz"></div>
+
+            </div>
+
+        </section>
+
 
         <footer>The Dog Breed Quiz is made possible thanks to the free API by <a href="www.google.se">DOG CEO Zine</a>
         </footer>

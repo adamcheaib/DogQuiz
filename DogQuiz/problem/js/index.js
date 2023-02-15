@@ -19,5 +19,18 @@ function change_css(event) {
 
 
 
-let random_dog = Math.floor(Math.random() * ALL_BREEDS.length);
-console.log(random_dog);
+let random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
+
+async function get_dog(dog_object) {
+    try {
+        let dog = await (await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`))).json();
+        console.log(dog);
+        document.querySelector("#dog_image").style.backgroundImage = `url(${dog.message})`;
+        document.querySelector("#dog_image").style.backgroundSize = "cover";
+        document.querySelector("#dog_image").style.backgroundPosition = "center";
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+get_dog(random_dog);
