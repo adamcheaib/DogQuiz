@@ -30,6 +30,9 @@
 }
 
 #dog_image {
+    background-image: url(../media/logo.png);
+    background-position: center;
+    background-size: cover;
     border-radius: 12px;
 }
 
