@@ -17,8 +17,6 @@ function change_css(event) {
 
 */
 
-
-
 let random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
 
 async function get_dog(dog_object) {
@@ -34,3 +32,8 @@ async function get_dog(dog_object) {
 };
 
 get_dog(random_dog);
+
+/*Kanske ta bort allt där uppe och spara till senare! */
+
+let create_or_login_page = document.querySelector("#already_or_newAccount");
+create_or_login_page.addEventListener("click", css_page_change);
