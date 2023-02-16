@@ -28,7 +28,7 @@ body {
     grid-template-rows: repeat(auto-fit, minmax(0, max-content));
     gap: 4rem;
     height: 100%;
-    background-color: rgb(123, 203, 230);
+    background-color: rgb(95, 156, 177);
 }
 
 #top_page {
@@ -42,6 +42,7 @@ body {
 #top_page>p {
     font-size: 1.2rem;
     justify-self: end;
+    user-select: none;
 }
 
 #logo {

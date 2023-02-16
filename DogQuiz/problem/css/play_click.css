@@ -1,0 +1,89 @@
+@font-face {
+    font-family: "Roboto Condensed Bold";
+    src: url(../fonts/RobotoCondensed-Bold.ttf);
+}
+
+.login_register {
+    display: none;
+}
+
+.quiz {
+    display: none;
+}
+
+#wrapper>:not(.play_click) {
+    display: none;
+}
+
+#wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#play_click_container {
+    background-image: url(../media/play_click/dog_click.png);
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 300px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotatorGrower;
+    animation-duration: 3s;
+}
+
+#play_click_container>span {
+    font-family: "Roboto Condensed Bold";
+    font-size: 2.5rem;
+    color: white;
+    border-radius: 20px;
+    width: 18vw;
+    padding-top: 10px 0 10px 0;
+    text-align: center;
+    opacity: 0%;
+    animation: textAppear;
+    animation-delay: 3s;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    user-select: none;
+    margin-top: 5vw;
+    background-color: black;
+}
+
+.play_click:hover {
+    cursor: pointer;
+}
+
+@keyframes textAppear {
+    0% {
+        opacity: 30%
+    }
+
+    50% {
+        opacity: 90%
+    }
+
+    100% {
+        opacity: 30%;
+    }
+}
+
+
+@keyframes rotatorGrower {
+    0% {
+        height: 1px;
+        width: 1px;
+        transform: rotate(0deg);
+        pointer-events: none;
+    }
+
+    100% {
+        height: 300px;
+        width: 300px;
+        transform: rotate(1440deg);
+        pointer-events: auto;
+    }
+}

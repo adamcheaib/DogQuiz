@@ -2,11 +2,15 @@
     display: none;
 }
 
+.play_click {
+    display: none;
+}
+
 
 #wrapper>* {
     animation-name: intro;
     animation-duration: 3s;
-    animation-delay: 3s;
+    animation-delay: 1.5s;
     animation-fill-mode: forwards;
     opacity: 0%;
 }
@@ -158,7 +162,6 @@ h1 {
 .intro {
     z-index: 2;
     font-size: 50px;
-    color: white;
     font-family: "Roboto-Regular";
 }
 
@@ -169,6 +172,7 @@ h1 {
     animation-duration: 1s;
     position: absolute;
     bottom: 100%;
+    color: black;
 }
 
 .two {
@@ -177,6 +181,7 @@ h1 {
     animation-delay: 1s;
     position: absolute;
     left: 120%;
+    color: white;
 }
 
 .three {
@@ -185,6 +190,7 @@ h1 {
     animation-delay: 2s;
     position: absolute;
     right: 100%;
+    color: black;
 }
 
 
