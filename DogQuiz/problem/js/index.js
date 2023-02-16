@@ -33,7 +33,9 @@ async function get_dog(dog_object) {
 
 get_dog(random_dog);
 
-/*Kanske ta bort allt där uppe och spara till senare! */
+/*(Det där uppe) Kanske ta bort allt där uppe och spara till senare! */
 
-let create_or_login_page = document.querySelector("#already_or_newAccount");
-create_or_login_page.addEventListener("click", css_page_change);
+document.querySelector("#already_or_newAccount").addEventListener("click", css_page_change);
+
+document.querySelector("#login_button").addEventListener("click", consolelogger1); // Behöver ändra funktionen
+
