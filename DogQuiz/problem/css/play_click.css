@@ -22,7 +22,7 @@
 }
 
 #play_click_container {
-    background-image: url(../media/play_click/dog_click.png);
+    background-image: url(../media/play_click/Dog_transparent.png);
     background-size: cover;
     background-position: center;
     height: 300px;
@@ -45,7 +45,7 @@
     text-align: center;
     opacity: 0%;
     animation: textAppear;
-    animation-delay: 3s;
+    animation-delay: 3.5s;
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
     user-select: none;

@@ -16,7 +16,7 @@ function pause_sound(sound) {
 
 function click_to_play(event) {
 
-    play_sound(clickSound)
+    play_sound(clickSound);
     class_manipulation(".css_file", "introduction", "remove");
     class_manipulation(".css_file", "loggo_on", "add");
     document.querySelector(".css_file").setAttribute("href", "./css/login_register.css");
