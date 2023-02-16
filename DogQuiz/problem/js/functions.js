@@ -67,6 +67,9 @@ function consolelogger1(event) {
             document.querySelector(".css_file").setAttribute("href", "./css/quiz.css")
             username_field.value = "";
             password_field.value = "";
+            let doggo = new Audio();
+            doggo.src = "./media/audio/background.mp3";
+            doggo.play()
         } else {
             console.log("No such user found!")
             username_field.value = "";
