@@ -21,27 +21,6 @@ body {
     background-color: black;
 }
 
-@keyframes rainbow_background {
-    0% {
-        background-color: rgb(133, 207, 231);
-    }
-
-    25% {
-        background-color: green;
-    }
-
-    50% {
-        background-color: purple;
-    }
-
-    75% {
-        background-color: greenyellow;
-    }
-
-    100% {
-        background-color: rgb(133, 207, 231);
-    }
-}
 
 #wrapper {
     border-radius: 1.5rem;
@@ -84,4 +63,28 @@ footer {
     padding: 1.1em;
     align-self: end;
     margin-top: 2vw;
+    user-select: none;
+}
+
+
+@keyframes rainbow_background {
+    0% {
+        background-color: rgb(133, 207, 231);
+    }
+
+    25% {
+        background-color: green;
+    }
+
+    50% {
+        background-color: purple;
+    }
+
+    75% {
+        background-color: greenyellow;
+    }
+
+    100% {
+        background-color: rgb(133, 207, 231);
+    }
 }
