@@ -22,7 +22,6 @@ function click_to_play(event) {
     document.querySelector(".css_file").setAttribute("href", "./css/login_register.css");
 
     setTimeout(play_sound, 2000, rickroll);
-
 };
 
 function change_text_content(css_selector, content) {
