@@ -19,20 +19,8 @@ function class_manipulation(dom_reference, class_name, action) {
     };
 }
 
-function consolelogger1(event) {
 
-    if (event.target.className === "register_now") {
-
-        console.log("REGISTERED")
-
-
-    } else {
-        console.log("LOGGED ON")
-    }
-};
-
-
-function css_page_change(event) {
+function css_register_login_change(event) {
     if (!event.target.classList.contains("registration")) {
 
         event.target.className = "registration";
@@ -59,4 +47,34 @@ function css_page_change(event) {
 
     };
 };
+
+const array1 = ["adam", "rasta"]
+
+function consolelogger1(event) {
+
+    if (event.target.className === "register_now") {
+
+        console.log("REGISTERED")
+        window.localStorage.setItem("username", username_field.value);
+        window.localStorage.setItem("password", password_field.value);
+        username_field.value = "";
+        password_field.value = "";
+        console.log(window.localStorage);
+
+    } else {
+
+        if (username_field.value === "adam" && password_field.value === "rasta") {
+            document.querySelector(".css_file").setAttribute("href", "./css/quiz.css")
+            username_field.value = "";
+            password_field.value = "";
+        } else {
+            console.log("No such user found!")
+            username_field.value = "";
+            password_field.value = "";
+        }
+
+    }
+};
+
+
 

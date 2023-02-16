@@ -35,12 +35,17 @@ get_dog(random_dog);
 
 /*(Det där uppe) Kanske ta bort allt där uppe och spara till senare! */
 
-const username_field = document.querySelector("#user_inputs > .input_fields:nth-child(1) > input");
-// const password_field = document.querySelector("#user_inputs > .input_fields:nth- > input");
+const username_field = document.querySelector("#user_inputs .input_fields > input");
+const password_field = document.querySelector("#user_inputs > .input_fields:nth-child(4) > input");
 console.log(username_field);
-// console.log(password_field)
+console.log(password_field);
 
-document.querySelector("#already_or_newAccount").addEventListener("click", css_page_change);
+console.log(window.localStorage);
+console.log(window.localStorage.clear())
+username_field.value = "";
+password_field.value = "";
+
+document.querySelector("#already_or_newAccount").addEventListener("click", css_register_login_change);
 
 document.querySelector("#login_button").addEventListener("click", consolelogger1); // Behöver ändra funktionen
 
