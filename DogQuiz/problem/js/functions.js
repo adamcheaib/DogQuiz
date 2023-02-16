@@ -1,19 +1,29 @@
 "use strict"
 
-function click_to_play(event) {
-    document.querySelector(".css_file").setAttribute("href", "./css/login_register.css");
-    let click_play_sound = new Audio();
-    click_play_sound.src = "./media/audio/click.mp3";
-    click_play_sound.play();
+function audio_picker(source) {
+    let new_audio = document.querySelector(source)
+    return new_audio
+};
 
-    setTimeout(() => {
-        let doggo = new Audio();
-        doggo.src = "./media/audio/background.mp3";
-        doggo.setAttribute("loop", true)
-        doggo.play();
-    }, 2000);
-
+function play_sound(sound) {
+    sound.play();
 }
+
+function pause_sound(sound) {
+    sound.pause();
+}
+
+
+function click_to_play(event) {
+
+    play_sound(clickSound)
+    class_manipulation(".css_file", "introduction", "remove");
+    class_manipulation(".css_file", "loggo_on", "add");
+    document.querySelector(".css_file").setAttribute("href", "./css/login_register.css");
+
+    setTimeout(play_sound, 2000, rickroll);
+
+};
 
 function change_text_content(css_selector, content) {
     let dom_element = document.querySelector(css_selector);
@@ -80,6 +90,7 @@ function consolelogger1(event) {
             document.querySelector(".css_file").setAttribute("href", "./css/quiz.css")
             username_field.value = "";
             password_field.value = "";
+            rickroll.pause()
         } else {
             console.log("No such user found!")
             username_field.value = "";
