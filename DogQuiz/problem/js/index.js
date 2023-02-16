@@ -17,7 +17,7 @@ function change_css(event) {
 
 */
 
-let random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
+let random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length - 1)];
 
 async function get_dog(dog_object) {
     try {
@@ -34,6 +34,11 @@ async function get_dog(dog_object) {
 get_dog(random_dog);
 
 /*(Det där uppe) Kanske ta bort allt där uppe och spara till senare! */
+
+const username_field = document.querySelector("#user_inputs > .input_fields:first-child > input");
+const password_field = document.querySelector("#user_inputs > .input_fields:nth-child(2) > input");
+console.log(username_field);
+console.log(password_field)
 
 document.querySelector("#already_or_newAccount").addEventListener("click", css_page_change);
 

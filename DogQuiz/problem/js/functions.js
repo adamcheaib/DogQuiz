@@ -13,7 +13,7 @@ function consolelogger1(event) {
 
 
     } else {
-        console.log("LOGGED ON");
+        console.log("LOGGED ON")
     }
 };
 
@@ -25,6 +25,8 @@ function css_page_change(event) {
         change_text_content("#user_interaction > span", "Ready when you are...");
         change_text_content("#user_inputs > h1", "REGISTER");
         change_text_content("#login_button", "Register");
+        document.querySelector("#wrapper").classList.add("to_registration_page");
+        document.querySelector("#wrapper").classList.remove("to_login_page");
 
         // document.querySelector("#login_button").removeEventListener("click", consolelogger2);
         document.querySelector("#login_button").classList.add("register_now");
@@ -37,6 +39,9 @@ function css_page_change(event) {
         change_text_content("#login_button", "Login");
         document.querySelector("#login_button").classList.remove("register_now");
         document.querySelector("#login_button").classList.add("login_now");
+        document.querySelector("#wrapper").classList.add("to_login_page");
+        document.querySelector("#wrapper").classList.remove("to_registration_page");
+
     };
 };
 
