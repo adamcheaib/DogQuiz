@@ -66,6 +66,7 @@ footer {
 .to_registration_page {
     animation-name: registration_page;
     animation-duration: 2s;
+    animation-fill-mode: forwards;
 }
 
 @keyframes registration_page {

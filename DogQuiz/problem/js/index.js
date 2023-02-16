@@ -35,10 +35,10 @@ get_dog(random_dog);
 
 /*(Det där uppe) Kanske ta bort allt där uppe och spara till senare! */
 
-const username_field = document.querySelector("#user_inputs > .input_fields:first-child > input");
-const password_field = document.querySelector("#user_inputs > .input_fields:nth-child(2) > input");
+const username_field = document.querySelector("#user_inputs > .input_fields:nth-child(1) > input");
+// const password_field = document.querySelector("#user_inputs > .input_fields:nth- > input");
 console.log(username_field);
-console.log(password_field)
+// console.log(password_field)
 
 document.querySelector("#already_or_newAccount").addEventListener("click", css_page_change);
 
