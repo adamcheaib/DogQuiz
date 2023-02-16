@@ -21,7 +21,7 @@ function class_manipulation(dom_reference, class_name, action) {
 
 
 function css_register_login_change(event) {
-    if (!event.target.classList.contains("registration")) {
+    if (event.target.className !== "registration") {
 
         event.target.className = "registration";
         event.target.textContent = "Already have an account? Go to login";
@@ -64,6 +64,9 @@ function consolelogger1(event) {
     } else {
 
         if (username_field.value === "adam" && password_field.value === "rasta") {
+
+
+
             document.querySelector(".css_file").setAttribute("href", "./css/quiz.css")
             username_field.value = "";
             password_field.value = "";
