@@ -9,7 +9,7 @@
 
 #wrapper>* {
     animation-name: intro;
-    animation-duration: 3s;
+    animation-duration: 2.5s;
     animation-delay: 1.5s;
     animation-fill-mode: forwards;
     opacity: 0%;
@@ -80,6 +80,15 @@ h1 {
 
 /* EXTRA */
 
+@keyframes intro {
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
 
 .doggo {
     height: 10vw;
