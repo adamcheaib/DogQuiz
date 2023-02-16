@@ -69,6 +69,7 @@ function consolelogger1(event) {
             password_field.value = "";
             let doggo = new Audio();
             doggo.src = "./media/audio/background.mp3";
+            doggo.setAttribute("loop", true)
             doggo.play()
         } else {
             console.log("No such user found!")
@@ -79,5 +80,17 @@ function consolelogger1(event) {
     }
 };
 
+
+async function get_dog(dog_object) {
+    try {
+        let dog = await (await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`))).json();
+        console.log(dog);
+        document.querySelector("#dog_image").style.backgroundImage = `url(${dog.message})`;
+        document.querySelector("#dog_image").style.backgroundSize = "cover";
+        document.querySelector("#dog_image").style.backgroundPosition = "center";
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 
