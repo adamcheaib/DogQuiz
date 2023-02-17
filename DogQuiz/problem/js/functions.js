@@ -1,28 +1,5 @@
 "use strict"
 
-function audio_picker(source) {
-    let new_audio = document.querySelector(source)
-    return new_audio
-};
-
-function play_sound(sound) {
-    sound.play();
-}
-
-function pause_sound(sound) {
-    sound.pause();
-}
-
-
-function click_to_play(event) {
-
-    play_sound(clickSound);
-    class_manipulation(".css_file", "introduction", "remove");
-    class_manipulation(".css_file", "loggo_on", "add");
-    document.querySelector(".css_file").setAttribute("href", "./css/login_register.css");
-
-    setTimeout(play_sound, 2200, rickroll);
-};
 
 function change_text_content(css_selector, content) {
     let dom_element = document.querySelector(css_selector);
@@ -113,3 +90,27 @@ async function get_dog(dog_object) {
 };
 
 
+/* MISC FUNCTIONS */
+
+function audio_picker(source) {
+    let new_audio = document.querySelector(source)
+    return new_audio
+};
+
+function play_sound(sound) {
+    sound.play();
+}
+
+function pause_sound(sound) {
+    sound.pause();
+};
+
+function click_to_play(event) {
+
+    play_sound(clickSound);
+    class_manipulation(".css_file", "introduction", "remove");
+    class_manipulation(".css_file", "loggo_on", "add");
+    document.querySelector(".css_file").setAttribute("href", "./css/login_register.css");
+
+    setTimeout(play_sound, 2200, rickroll);
+};
