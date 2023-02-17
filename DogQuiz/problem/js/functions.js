@@ -49,7 +49,7 @@ function css_register_login_change(event) {
     };
 };
 
-function consolelogger1(event) {
+function accountCheck(event) {
 
     if (event.target.className === "register_now") {
 
@@ -60,13 +60,16 @@ function consolelogger1(event) {
         password_field.value = "";
         console.log(window.localStorage);
 
+
     } else {
 
         if (username_field.value === "adam" && password_field.value === "rasta") {
             document.querySelector(".css_file").setAttribute("href", "./css/quiz.css")
             username_field.value = "";
             password_field.value = "";
-            rickroll.pause()
+            rickroll.pause();
+            quiz_BGM.play()
+
         } else {
             console.log("No such user found!")
             username_field.value = "";
@@ -99,7 +102,7 @@ function audio_picker(source) {
 
 function play_sound(sound) {
     sound.play();
-}
+};
 
 function pause_sound(sound) {
     sound.pause();

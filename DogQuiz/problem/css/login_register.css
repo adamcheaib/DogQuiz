@@ -91,10 +91,11 @@ h1 {
 }
 
 .doggo {
-    height: 10vw;
-    width: 10vw;
+    height: 20vh;
+    width: 20vh;
     position: absolute;
-    top: 19vh;
-    left: 44vw;
+    top: 30%;
+    left: 50%;
     opacity: 100%;
+    transform: translate(-58%, -50%);
 }
