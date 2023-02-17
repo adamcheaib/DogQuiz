@@ -47,20 +47,21 @@
 
 #choices {
     display: grid;
-    grid-template-areas:
-        "a a"
-        "a a";
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
     gap: 5px;
 }
 
 .alternative {
     border: 1px solid gray;
+    font-size: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: wheat;
     border-radius: 10px;
     user-select: none;
+    white-space: nowrap;
 }
 
 .alternative:hover {

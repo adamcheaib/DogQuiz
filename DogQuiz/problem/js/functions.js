@@ -78,7 +78,6 @@ function accountCheck(event) {
             password_field.value = "";
             rickroll.pause();
             quiz_BGM.play();
-            // get_all_dogs();
 
         } else {
             console.log("No such user found!")
@@ -101,10 +100,27 @@ function accountCheck(event) {
 /* QUIZ PART */
 
 function get_wrong_dogs() {
-    document.querySelectorAll((".alternative")).forEach(item => {
-        item.classList.add("wrong"); item.textContent = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)].name
+    const three_alternatives = document.querySelectorAll(".alternative");
+    const number_array = []
+
+    while (3 > number_array.length) {
+        let random_number = Math.floor(Math.random() * three_alternatives.length);
+        if (!number_array.includes(random_number)) {
+            number_array.push(random_number)
+        };
+    }
+    console.log(number_array)
+    number_array.forEach(number => {
+        three_alternatives[number].classList.add("wrong");
+        const wrong_random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
+        three_alternatives[number].textContent = wrong_random_dog.name
     });
 }
+
+// document.querySelectorAll((".alternative")).forEach(item => {
+//     item.classList.add("wrong"); item.textContent = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)].name
+// });
+// }
 
 
 
@@ -113,20 +129,20 @@ async function get_all_dogs() {
 
 
     const random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
-    const all_alternatives = document.querySelectorAll(".alternative");
 
     async function get_correct_dog(dog_object) {
 
+        document.querySelector("#dog_image").style.backgroundImage = `url(./media/logo.png)`;
+
         try {
+
+            let fetched_dog = await (await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`))).json();
             get_wrong_dogs();
-            let dog = await (await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`))).json();
-            console.log(dog);
-            document.querySelector("#dog_image").style.backgroundImage = `url(${dog.message})`;
+            document.querySelector("#dog_image").style.backgroundImage = `url(${fetched_dog.message})`;
             document.querySelector("#dog_image").style.backgroundSize = "cover";
             document.querySelector("#dog_image").style.backgroundPosition = "center";
-            const correct_choice = all_alternatives[Math.floor(Math.random() * all_alternatives.length)]
 
-            correct_choice.classList.remove("wrong");
+            const correct_choice = document.querySelector("#choices > :not(.wrong)");
             correct_choice.classList.add("correct");
             correct_choice.textContent = dog_object.name;
             add_answer_check(dog_object);
@@ -147,19 +163,21 @@ async function get_all_dogs() {
 
             if (event.target.textContent === dog_object.name) {
 
-                console.log("CORRECT!");
+                alert("Your answer is CORRECT!");
                 document.querySelectorAll(".alternative").forEach(item => {
                     item.classList.remove("wrong");
                     item.classList.remove("correct");
-                    item.removeEventListener("click", check_answer)
+                    item.removeEventListener("click", check_answer);
+                    item.textContent = "";
                 });
                 get_all_dogs();
             } else {
-                console.log("WRONG");
+                alert("Your answer is WRONG!")
                 document.querySelectorAll(".alternative").forEach(item => {
                     item.classList.remove("wrong");
                     item.classList.remove("correct");
-                    item.removeEventListener("click", check_answer)
+                    item.removeEventListener("click", check_answer);
+                    item.textContent = "";
                 });
                 get_all_dogs();
             }
