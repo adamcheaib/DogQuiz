@@ -62,28 +62,62 @@ function css_register_login_change(event) {
     };
 };
 
+async function register_user(username_value, password_value) {
 
-function accountCheck(event) {
+    try {
+        const user_to_register = { action: "register", user_name: username_value, password: password_value };
+        const send_user = { method: "POST", headers: { "Content-type": "application/json; charset=UTF-8" }, body: JSON.stringify(user_to_register) };
+        const fly_away_user = await (await fetch(new Request(`https://teaching.maumt.se/apis/access/`, send_user))).json();
+        console.log(fly_away_user.json())
+    } catch (error) {
+        console.log(error);
+        // register_user(username_value, password_value);
+    }
+};
+
+async function login_user(username_value, password_value) {
+    console.log(username_value)
+    console.log(password_value)
+    try {
+        const user = await fetch(new Request(`https://www.teaching.maumt.se/apis/access/prefix?action=check_credentials&username=${username_value}&password=${password_value}`));
+        const full_user = await user.json();
+        console.log(user);
+        console.log(full_user)
+    } catch (error) {
+        console.log(error);
+        // login_user(username_value, password_value);
+    }
+}
+
+
+async function accountCheck(event) {
 
     if (event.target.className === "register_now") {
+        const username_field = document.querySelector("#user_inputs .input_fields > input");
+        const password_field = document.querySelector("#user_inputs > .input_fields:nth-child(4) > input");
 
-        console.log("REGISTERED")
-
+        await register_user(username_field.value, password_field.value);
 
     } else {
+        const username_field = document.querySelector("#user_inputs .input_fields > input");
+        const password_field = document.querySelector("#user_inputs > .input_fields:nth-child(4) > input");
+        console.log(username_field.value)
+        console.log(password_field.value)
 
-        if (username_field.value === "adam" && password_field.value === "rasta") {
-            document.querySelector(".css_file").setAttribute("href", "./css/quiz.css")
-            username_field.value = "";
-            password_field.value = "";
-            rickroll.pause();
-            quiz_BGM.play();
+        await login_user(username_field.value, password_field.value);
 
-        } else {
-            console.log("No such user found!")
-            username_field.value = "";
-            password_field.value = "";
-        }
+        // if (username_field.value === "adam" && password_field.value === "rasta") {
+        //     document.querySelector(".css_file").setAttribute("href", "./css/quiz.css")
+        //     username_field.value = "";
+        //     password_field.value = "";
+        //     rickroll.pause();
+        //     quiz_BGM.play();
+
+        // } else {
+        //     console.log("No such user found!")
+        //     username_field.value = "";
+        //     password_field.value = "";
+        // }
 
     }
 };
@@ -109,18 +143,13 @@ function get_wrong_dogs() {
             number_array.push(random_number)
         };
     }
-    console.log(number_array)
+
     number_array.forEach(number => {
         three_alternatives[number].classList.add("wrong");
         const wrong_random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
         three_alternatives[number].textContent = wrong_random_dog.name
     });
 }
-
-// document.querySelectorAll((".alternative")).forEach(item => {
-//     item.classList.add("wrong"); item.textContent = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)].name
-// });
-// }
 
 
 
@@ -157,7 +186,6 @@ async function get_all_dogs() {
 
     function add_answer_check(dog_object) {
         document.querySelectorAll(".alternative").forEach(item => item.addEventListener("click", check_answer));
-        console.log(dog_object.name);
 
         function check_answer(event) {
 
@@ -224,5 +252,5 @@ function click_to_play(event) {
     class_manipulation(".css_file", "loggo_on", "add");
     document.querySelector(".css_file").setAttribute("href", "./css/login_register.css");
 
-    setTimeout(play_sound, 2200, rickroll);
+    setTimeout(play_sound, 2700, rickroll);
 };
