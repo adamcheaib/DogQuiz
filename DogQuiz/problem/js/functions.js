@@ -1,5 +1,6 @@
 "use strict"
 
+/* GENERAL FUNCTIONS */
 
 function change_text_content(css_selector, content) {
     let dom_element = document.querySelector(css_selector);
@@ -19,6 +20,18 @@ function class_manipulation(dom_reference, class_name, action) {
         document.querySelector(dom_reference).className = class_name
     };
 }
+
+
+
+
+
+
+
+
+
+
+
+/* LOGIN/REGISTER SECTION */
 
 
 function css_register_login_change(event) {
@@ -49,16 +62,12 @@ function css_register_login_change(event) {
     };
 };
 
+
 function accountCheck(event) {
 
     if (event.target.className === "register_now") {
 
         console.log("REGISTERED")
-        window.localStorage.setItem("username", username_field.value);
-        window.localStorage.setItem("password", password_field.value);
-        username_field.value = "";
-        password_field.value = "";
-        console.log(window.localStorage);
 
 
     } else {
@@ -80,17 +89,82 @@ function accountCheck(event) {
 };
 
 
-async function get_dog(dog_object) {
+
+
+
+
+
+
+
+
+/* QUIZ PART */
+
+function get_wrong_dogs() {
+
+    let i = 0;
+    const all_buttons = document.querySelectorAll(".alternative:not(.correct)");
+
+    while (i < 3) {
+        const new_wrong_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
+        if (new_wrong_dog.name !== document.querySelector(".correct").textContent) {
+            all_buttons[i].classList.add("wrong");
+            all_buttons[i].textContent = new_wrong_dog.name;
+            i++;
+        };
+    };
+};
+
+
+async function get_correct_dog(dog_object) {
+
+    let all_alternatives = document.querySelectorAll(".alternative");
+
     try {
         let dog = await (await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`))).json();
         console.log(dog);
         document.querySelector("#dog_image").style.backgroundImage = `url(${dog.message})`;
         document.querySelector("#dog_image").style.backgroundSize = "cover";
         document.querySelector("#dog_image").style.backgroundPosition = "center";
+        let correct_choice = all_alternatives[Math.floor(Math.random() * all_alternatives.length)];
+        correct_choice.classList.add("correct");
+        correct_choice.textContent = dog_object.name;
+        get_wrong_dogs();
+
     } catch (error) {
         console.log(error);
-    }
+    };
+
+
+    add_answer_check(dog_object);
+
+
+    function add_answer_check(dog_object) {
+        all_alternatives.forEach(item => item.addEventListener("click", control_answer));
+
+        function control_answer(event) {
+            if (event.target.textContent === dog_object.name) {
+                console.log("CORRECT!");
+                class_manipulation(".correct", "correct", "remove")
+            } else { console.log("WRONG!"); }
+        };
+
+    };
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* MISC FUNCTIONS */

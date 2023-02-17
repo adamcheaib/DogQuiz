@@ -7,7 +7,7 @@ och synas beroende på vilken class det är som aktiverat.
 
 let random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length - 1)];
 
-get_dog(random_dog);
+get_correct_dog(random_dog);
 
 /*(Det där uppe) Kanske ta bort allt där uppe och spara till senare! */
 
@@ -27,3 +27,4 @@ document.querySelector("#already_or_newAccount").addEventListener("click", css_r
 document.querySelector("#login_button").addEventListener("click", accountCheck); // Behöver ändra funktionen
 
 document.querySelector(".play_click").addEventListener("click", click_to_play);
+
