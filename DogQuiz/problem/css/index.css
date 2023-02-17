@@ -28,7 +28,7 @@ body {
     grid-template-rows: repeat(auto-fit, minmax(0, max-content));
     gap: 4rem;
     height: 100%;
-    background-color: rgb(95, 156, 177);
+    background-color: beige;
 }
 
 #top_page {
@@ -73,7 +73,7 @@ footer {
 @keyframes registration_page {
 
     from {
-        background-color: rgb(123, 203, 230);
+        background-color: beige;
     }
 
     to {
@@ -93,6 +93,6 @@ footer {
     }
 
     to {
-        background-color: rgb(123, 203, 230);
+        background-color: beige;
     }
 }

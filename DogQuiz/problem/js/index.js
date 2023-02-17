@@ -5,9 +5,8 @@ Skapa designen först för varje sida genom att lägga alla HTML-element som beh
 och synas beroende på vilken class det är som aktiverat.
 */
 
-let random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length - 1)];
 
-get_correct_dog(random_dog);
+get_all_dogs();
 
 /*(Det där uppe) Kanske ta bort allt där uppe och spara till senare! */
 

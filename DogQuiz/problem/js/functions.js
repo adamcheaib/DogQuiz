@@ -77,7 +77,8 @@ function accountCheck(event) {
             username_field.value = "";
             password_field.value = "";
             rickroll.pause();
-            quiz_BGM.play()
+            quiz_BGM.play();
+            // get_all_dogs();
 
         } else {
             console.log("No such user found!")
@@ -100,56 +101,72 @@ function accountCheck(event) {
 /* QUIZ PART */
 
 function get_wrong_dogs() {
+    document.querySelectorAll((".alternative")).forEach(item => {
+        item.classList.add("wrong"); item.textContent = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)].name
+    });
+}
 
-    let i = 0;
-    const all_buttons = document.querySelectorAll(".alternative:not(.correct)");
 
-    while (i < 3) {
-        const new_wrong_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
-        if (new_wrong_dog.name !== document.querySelector(".correct").textContent) {
-            all_buttons[i].classList.add("wrong");
-            all_buttons[i].textContent = new_wrong_dog.name;
-            i++;
+
+
+async function get_all_dogs() {
+
+
+    const random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
+    const all_alternatives = document.querySelectorAll(".alternative");
+
+    async function get_correct_dog(dog_object) {
+
+        try {
+            get_wrong_dogs();
+            let dog = await (await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`))).json();
+            console.log(dog);
+            document.querySelector("#dog_image").style.backgroundImage = `url(${dog.message})`;
+            document.querySelector("#dog_image").style.backgroundSize = "cover";
+            document.querySelector("#dog_image").style.backgroundPosition = "center";
+            const correct_choice = all_alternatives[Math.floor(Math.random() * all_alternatives.length)]
+
+            correct_choice.classList.remove("wrong");
+            correct_choice.classList.add("correct");
+            correct_choice.textContent = dog_object.name;
+            add_answer_check(dog_object);
+
+        } catch (error) {
+            console.log(error);
         };
-    };
-};
 
-
-async function get_correct_dog(dog_object) {
-
-    let all_alternatives = document.querySelectorAll(".alternative");
-
-    try {
-        let dog = await (await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`))).json();
-        console.log(dog);
-        document.querySelector("#dog_image").style.backgroundImage = `url(${dog.message})`;
-        document.querySelector("#dog_image").style.backgroundSize = "cover";
-        document.querySelector("#dog_image").style.backgroundPosition = "center";
-        let correct_choice = all_alternatives[Math.floor(Math.random() * all_alternatives.length)];
-        correct_choice.classList.add("correct");
-        correct_choice.textContent = dog_object.name;
-        get_wrong_dogs();
-
-    } catch (error) {
-        console.log(error);
     };
 
-
-    add_answer_check(dog_object);
-
+    await get_correct_dog(random_dog);
 
     function add_answer_check(dog_object) {
-        all_alternatives.forEach(item => item.addEventListener("click", control_answer));
+        document.querySelectorAll(".alternative").forEach(item => item.addEventListener("click", check_answer));
+        console.log(dog_object.name);
 
-        function control_answer(event) {
+        function check_answer(event) {
+
             if (event.target.textContent === dog_object.name) {
-                console.log("CORRECT!");
-                class_manipulation(".correct", "correct", "remove")
-            } else { console.log("WRONG!"); }
-        };
 
+                console.log("CORRECT!");
+                document.querySelectorAll(".alternative").forEach(item => {
+                    item.classList.remove("wrong");
+                    item.classList.remove("correct");
+                    item.removeEventListener("click", check_answer)
+                });
+                get_all_dogs();
+            } else {
+                console.log("WRONG");
+                document.querySelectorAll(".alternative").forEach(item => {
+                    item.classList.remove("wrong");
+                    item.classList.remove("correct");
+                    item.removeEventListener("click", check_answer)
+                });
+                get_all_dogs();
+            }
+        }
     };
 };
+
 
 
 
