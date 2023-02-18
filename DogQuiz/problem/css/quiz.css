@@ -6,6 +6,10 @@
     display: none;
 }
 
+.alert {
+    visibility: hidden;
+}
+
 #logout {
     display: flex;
     justify-content: space-between;
@@ -54,7 +58,7 @@
 
 .alternative {
     border: 1px solid gray;
-    font-size: 1em;
+    font-size: 0.9em;
     display: flex;
     justify-content: center;
     align-items: center;
