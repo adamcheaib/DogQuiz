@@ -7,7 +7,7 @@ och synas beroende på vilken class det är som aktiverat.
 
 const username_field = document.querySelector("#user_inputs .input_fields > input");
 const password_field = document.querySelector("#user_inputs > .input_fields:nth-child(4) > input");
-get_all_dogs();
+// get_all_dogs();
 
 
 /*(Det där uppe) Kanske ta bort allt där uppe och spara till senare! */

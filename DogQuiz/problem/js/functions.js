@@ -21,7 +21,9 @@ function class_manipulation(dom_reference, class_name, action) {
     };
 }
 
-function create_alert(boxText, showhide_button, buttonText, status) {
+function create_alert(status) {
+    document.querySelector(".white_cover > div").innerHTML = `<span class="response_popup_box"></span>
+    <button class="popup_button "></button>`
     class_manipulation(".white_cover", "hide_alert", "remove");
     class_manipulation(".white_cover", "show_alert", "add");
 
@@ -51,7 +53,14 @@ function create_alert(boxText, showhide_button, buttonText, status) {
     };
 };
 
-
+function loading_alert(content) {
+    class_manipulation(".white_cover", "show_alert", "add");
+    class_manipulation(".white_cover", "hide_alert", "remove");
+    document.querySelector(".white_cover > div").style.backgroundColor = "white";
+    document.querySelector(".white_cover > div").style.border = "1px solid gray";
+    document.querySelector(".white_cover > div").style.justifyContent = "center";
+    document.querySelector(".white_cover > div").innerHTML = `<div>${content}</div>`;
+}
 
 
 
@@ -107,6 +116,7 @@ async function register_user(username_value, password_value) {
 
 
 async function login_user(username_value, password_value) {
+    loading_alert("Contacting server...");
 
     try {
         const user = await fetch(new Request(`https://www.teaching.maumt.se/apis/access/?action=check_credentials&user_name=${username_value}&password=${password_value}`));
@@ -115,6 +125,9 @@ async function login_user(username_value, password_value) {
         password_field.value = "";
 
         if (user.ok) {
+            get_all_dogs()
+            class_manipulation(".white_cover", "hide_alert", "add");
+            class_manipulation(".white_cover", "show_alert", "remove");
             // alert("Logged in!");
             // create_alert(0, 0, 0, "login success");
             document.querySelector(".css_file").setAttribute("href", "./css/quiz.css");
@@ -201,6 +214,7 @@ async function get_all_dogs() {
 
     async function get_correct_dog(dog_object) {
         document.querySelector("#dog_image").style.backgroundImage = `url(./media/logo.png)`;
+        // loading_alert("Fetching image..."); // FORTSÄTT HÄR
         try {
             let fetched_dog = await (await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`))).json();
             get_wrong_dogs();
@@ -229,7 +243,7 @@ async function get_all_dogs() {
 
             if (event.target.textContent === dog_object.name) {
 
-                create_alert(0, 0, 0, "correct answer")
+                create_alert("correct answer")
                 document.querySelectorAll(".alternative").forEach(item => {
                     item.classList.remove("wrong");
                     item.classList.remove("correct");
@@ -237,7 +251,7 @@ async function get_all_dogs() {
                     // item.textContent = "";
                 });
             } else {
-                create_alert(0, 0, 0, "wrong answer")
+                create_alert("wrong answer")
                 document.querySelectorAll(".alternative").forEach(item => {
                     item.classList.remove("wrong");
                     item.classList.remove("correct");
