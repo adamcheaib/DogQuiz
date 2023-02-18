@@ -49,8 +49,6 @@ function create_alert(boxText, showhide_button, buttonText, status) {
         event.target.removeEventListener("click", answer_popup);
         get_all_dogs();
     };
-
-
 };
 
 
@@ -175,16 +173,16 @@ async function accountCheck(event) {
 
 function get_wrong_dogs() {
     const three_alternatives = document.querySelectorAll(".alternative");
-    const number_array = []
+    const index_numbers = []
 
-    while (3 > number_array.length) {
+    while (3 > index_numbers.length) {
         let random_number = Math.floor(Math.random() * three_alternatives.length);
-        if (!number_array.includes(random_number)) {
-            number_array.push(random_number)
+        if (!index_numbers.includes(random_number)) {
+            index_numbers.push(random_number)
         };
     }
 
-    number_array.forEach(number => {
+    index_numbers.forEach(number => {
         three_alternatives[number].classList.add("wrong");
         const wrong_random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
         three_alternatives[number].textContent = wrong_random_dog.name

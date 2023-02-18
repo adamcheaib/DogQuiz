@@ -28,4 +28,3 @@ document.querySelector("#already_or_newAccount").addEventListener("click", css_r
 document.querySelector("#login_button").addEventListener("click", accountCheck); // Behöver ändra funktionen
 
 document.querySelector(".play_click").addEventListener("click", click_to_play);
-
