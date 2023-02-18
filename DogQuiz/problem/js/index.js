@@ -5,7 +5,8 @@ Skapa designen först för varje sida genom att lägga alla HTML-element som beh
 och synas beroende på vilken class det är som aktiverat.
 */
 
-
+const username_field = document.querySelector("#user_inputs .input_fields > input");
+const password_field = document.querySelector("#user_inputs > .input_fields:nth-child(4) > input");
 get_all_dogs();
 
 
@@ -18,8 +19,8 @@ get_all_dogs();
 
 console.log(window.localStorage);
 console.log(window.localStorage.clear())
-// username_field.value = "";
-// password_field.value = "";
+username_field.value = "";
+password_field.value = "";
 
 
 document.querySelector("#already_or_newAccount").addEventListener("click", css_register_login_change);

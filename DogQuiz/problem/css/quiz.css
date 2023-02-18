@@ -6,8 +6,12 @@
     display: none;
 }
 
-.alert {
+.hide_alert {
     visibility: hidden;
+}
+
+.show_alert {
+    visibility: visible;
 }
 
 #logout {

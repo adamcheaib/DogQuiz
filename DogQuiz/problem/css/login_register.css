@@ -6,6 +6,14 @@
     display: none;
 }
 
+.hide_alert {
+    visibility: hidden;
+}
+
+.show_alert {
+    visibility: visible;
+}
+
 
 #wrapper>* {
     animation-name: intro;

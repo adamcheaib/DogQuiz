@@ -7,10 +7,6 @@
     display: none;
 }
 
-.quiz {
-    display: none;
-}
-
 #wrapper>:not(.play_click) {
     display: none;
 }
@@ -50,7 +46,7 @@
     animation-iteration-count: infinite;
     user-select: none;
     margin-top: 5vw;
-    background-color: black;
+    background-color: darkred;
 }
 
 .play_click:hover {

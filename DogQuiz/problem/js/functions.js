@@ -21,6 +21,37 @@ function class_manipulation(dom_reference, class_name, action) {
     };
 }
 
+function create_alert(boxText, showhide_button, buttonText, status) {
+    class_manipulation(".white_cover", "hide_alert", "remove");
+    class_manipulation(".white_cover", "show_alert", "add");
+
+
+    if (status === "correct answer") {
+        change_text_content(".response_popup_box", "CORRECT!");
+        change_text_content(".popup_button", "ONE MORE");
+        document.querySelector(".white_cover > div").style.backgroundColor = "lightgreen";
+        document.querySelector(".popup_button").addEventListener("click", answer_popup);
+    };
+
+    if (status === "wrong answer") {
+        change_text_content(".response_popup_box", "WRONG! :(");
+        change_text_content(".popup_button", "ONE MORE");
+        document.querySelector(".white_cover > div").style.backgroundColor = "darkred";
+        document.querySelector(".popup_button").addEventListener("click", answer_popup);
+    }
+
+    function answer_popup(event) {
+        class_manipulation(".white_cover", "show_alert", "remove");
+        class_manipulation(".white_cover", "hide_alert", "add");
+
+        document.querySelectorAll(".alternative").forEach(item => item.textContent = "")
+
+        event.target.removeEventListener("click", answer_popup);
+        get_all_dogs();
+    };
+
+
+};
 
 
 
@@ -66,45 +97,54 @@ async function register_user(username_value, password_value) {
 
     try {
         const user_to_register = { action: "register", user_name: username_value, password: password_value };
-        const send_user = { method: "POST", headers: { "Content-type": "application/json; charset=UTF-8" }, body: JSON.stringify(user_to_register) };
-        const fly_away_user = await (await fetch(new Request(`https://teaching.maumt.se/apis/access/`, send_user))).json();
-        console.log(fly_away_user.json())
+        const user_to_send = { method: "POST", headers: { "Content-type": "application/json; charset=UTF-8" }, body: JSON.stringify(user_to_register) };
+        const fly_away_user = await (await fetch(new Request(`https://teaching.maumt.se/apis/access/`, user_to_send))).json();
+        return fly_away_user;
     } catch (error) {
         console.log(error);
         // register_user(username_value, password_value);
     }
 };
 
+
+
 async function login_user(username_value, password_value) {
-    console.log(username_value)
-    console.log(password_value)
+
     try {
-        const user = await fetch(new Request(`https://www.teaching.maumt.se/apis/access/prefix?action=check_credentials&username=${username_value}&password=${password_value}`));
-        const full_user = await user.json();
+        const user = await fetch(new Request(`https://www.teaching.maumt.se/apis/access/?action=check_credentials&user_name=${username_value}&password=${password_value}`));
         console.log(user);
-        console.log(full_user)
+        username_field.value = "";
+        password_field.value = "";
+
+        if (user.ok) {
+            // alert("Logged in!");
+            // create_alert(0, 0, 0, "login success");
+            document.querySelector(".css_file").setAttribute("href", "./css/quiz.css");
+
+        }
     } catch (error) {
         console.log(error);
-        // login_user(username_value, password_value);
     }
 }
 
 
+
+
 async function accountCheck(event) {
 
-    if (event.target.className === "register_now") {
-        const username_field = document.querySelector("#user_inputs .input_fields > input");
-        const password_field = document.querySelector("#user_inputs > .input_fields:nth-child(4) > input");
 
+    if (event.target.className === "register_now") {
         await register_user(username_field.value, password_field.value);
+        username_field.value = "";
+        password_field.value = "";
 
     } else {
-        const username_field = document.querySelector("#user_inputs .input_fields > input");
-        const password_field = document.querySelector("#user_inputs > .input_fields:nth-child(4) > input");
-        console.log(username_field.value)
-        console.log(password_field.value)
+
+
 
         await login_user(username_field.value, password_field.value);
+        // rickroll.pause();
+        // quiz_BGM.play();
 
         // if (username_field.value === "adam" && password_field.value === "rasta") {
         //     document.querySelector(".css_file").setAttribute("href", "./css/quiz.css")
@@ -154,19 +194,19 @@ function get_wrong_dogs() {
 
 
 
+
+
 async function get_all_dogs() {
 
 
     const random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
 
     async function get_correct_dog(dog_object) {
-
         document.querySelector("#dog_image").style.backgroundImage = `url(./media/logo.png)`;
-
         try {
-
             let fetched_dog = await (await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`))).json();
             get_wrong_dogs();
+
             document.querySelector("#dog_image").style.backgroundImage = `url(${fetched_dog.message})`;
             document.querySelector("#dog_image").style.backgroundSize = "cover";
             document.querySelector("#dog_image").style.backgroundPosition = "center";
@@ -175,7 +215,6 @@ async function get_all_dogs() {
             correct_choice.classList.add("correct");
             correct_choice.textContent = dog_object.name;
             add_answer_check(dog_object);
-
         } catch (error) {
             console.log(error);
         };
@@ -184,6 +223,7 @@ async function get_all_dogs() {
 
     await get_correct_dog(random_dog);
 
+
     function add_answer_check(dog_object) {
         document.querySelectorAll(".alternative").forEach(item => item.addEventListener("click", check_answer));
 
@@ -191,23 +231,22 @@ async function get_all_dogs() {
 
             if (event.target.textContent === dog_object.name) {
 
-                alert("Your answer is CORRECT!");
+                create_alert(0, 0, 0, "correct answer")
                 document.querySelectorAll(".alternative").forEach(item => {
                     item.classList.remove("wrong");
                     item.classList.remove("correct");
                     item.removeEventListener("click", check_answer);
-                    item.textContent = "";
+                    // item.textContent = "";
                 });
-                get_all_dogs();
             } else {
-                alert("Your answer is WRONG!")
+                create_alert(0, 0, 0, "wrong answer")
                 document.querySelectorAll(".alternative").forEach(item => {
                     item.classList.remove("wrong");
                     item.classList.remove("correct");
                     item.removeEventListener("click", check_answer);
-                    item.textContent = "";
+                    // item.textContent = "";
                 });
-                get_all_dogs();
+                // get_all_dogs();
             }
         }
     };

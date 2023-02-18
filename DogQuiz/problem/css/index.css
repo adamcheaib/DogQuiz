@@ -3,6 +3,14 @@
     src: url(../fonts/RobotoCondensed-Regular.ttf);
 }
 
+.hide_alert {
+    visibility: hidden;
+}
+
+.show_alert {
+    visibility: visible;
+}
+
 
 
 html {
@@ -100,6 +108,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 4rem;
 }
 
 .white_cover>* {
@@ -109,8 +118,10 @@ footer {
     user-select: none;
 }
 
-.response_popup_box {
-    width: 85%;
+.white_cover>div {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
     height: 25%;
     background-color: lightgreen;
     border-radius: 15px;
@@ -119,6 +130,11 @@ footer {
     grid-template-rows: 1fr 1fr;
     padding: 20px;
     box-sizing: border-box;
+    gap: 10px;
+}
+
+.response_popup_box {
+    font-size: 2.1rem;
 }
 
 .popup_button {
@@ -131,22 +147,6 @@ footer {
     cursor: pointer;
 }
 
-.wrong_answer {
-    background-color: red;
-}
-
-.wrong_answer:active {
-    background-color: rgb(112, 0, 0);
-}
-
-
-.right_answer {
-    background-color: green;
-}
-
-.right_answer:active {
-    background-color: rgb(1, 70, 1);
-}
 
 @keyframes login_page {
     from {
