@@ -1,5 +1,7 @@
 "use strict"
 
+// FORTSÄTT RAD 255!
+
 /* GENERAL FUNCTIONS */
 
 function change_text_content(css_selector, content) {
@@ -154,14 +156,16 @@ async function login_user(username_value, password_value) {
         if (user.ok) {
             window.localStorage.setItem("username", username_value);
             window.localStorage.setItem("password", password_value);
+
             console.log(window.localStorage);
-            get_all_dogs()
+
             class_manipulation(".white_cover", "hide_alert", "add");
             class_manipulation(".white_cover", "show_alert", "remove");
             document.querySelector(".css_file").setAttribute("href", "./css/quiz.css");
             rickroll.pause();
             quiz_BGM.play();
             document.querySelector("#logout_text").textContent = `${window.localStorage.username}`;
+            get_all_dogs();
         } else {
             change_text_content("#user_interaction > span", "Wrong username or password");
             document.querySelector("#user_interaction > span").style.backgroundColor = "red";
@@ -186,24 +190,7 @@ async function accountCheck(event) {
         password_field.value = "";
 
     } else {
-
         await login_user(username_field.value, password_field.value);
-        // rickroll.pause();
-        // quiz_BGM.play();
-
-        // if (username_field.value === "adam" && password_field.value === "rasta") {
-        //     document.querySelector(".css_file").setAttribute("href", "./css/quiz.css")
-        //     username_field.value = "";
-        //     password_field.value = "";
-        //     rickroll.pause();
-        //     quiz_BGM.play();
-
-        // } else {
-        //     console.log("No such user found!")
-        //     username_field.value = "";
-        //     password_field.value = "";
-        // }
-
     };
 };
 
@@ -246,23 +233,31 @@ async function get_all_dogs() {
         document.querySelector("#dog_image").style.backgroundImage = `url(./media/logo.png)`;
 
         try {
-            let fetched_dog = await (await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`))).json();
-            class_manipulation(".white_cover", "show_alert", "remove");
-            class_manipulation(".white_cover", "hide_alert", "add");
-            get_wrong_dogs();
 
-            document.querySelector("#dog_image").style.backgroundImage = `url(${fetched_dog.message})`;
-            document.querySelector("#dog_image").style.backgroundSize = "cover";
-            document.querySelector("#dog_image").style.backgroundPosition = "center";
+            let dog_request = await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`));
+            console.log(dog_request);
+            if (dog_request.status === 200) {
+                let fetched_dog = await dog_request.json();
+                class_manipulation(".white_cover", "show_alert", "remove");
+                class_manipulation(".white_cover", "hide_alert", "add");
+                get_wrong_dogs();
 
-            const correct_choice = document.querySelector("#choices > :not(.wrong)");
-            correct_choice.classList.add("correct");
-            correct_choice.textContent = dog_object.name;
-            add_answer_check(dog_object);
+                document.querySelector("#dog_image").style.backgroundImage = `url(${fetched_dog.message})`;
+                document.querySelector("#dog_image").style.backgroundSize = "cover";
+                document.querySelector("#dog_image").style.backgroundPosition = "center";
+
+                const correct_choice = document.querySelector("#choices > :not(.wrong)");
+                correct_choice.classList.add("correct");
+                correct_choice.textContent = dog_object.name;
+                add_answer_check(dog_object);
+
+            } else {
+                create_alert("error", dog_request.statusText);
+            }
 
         } catch (error) {
             console.log(error);
-            get_all_dogs();
+            create_alert("error", error.message);
         };
 
     };
@@ -340,11 +335,13 @@ function pause_sound(sound) {
 async function click_to_play(event) {
 
     if (window.localStorage.length === 2) {
+        clickSound.play();
         try {
             let log_user_in = await fetch(new Request(`https://www.teaching.maumt.se/apis/access/?action=check_credentials&user_name=${window.localStorage.username}&password=${window.localStorage.password}`));
-            if (log_user_in.ok) {
+            console.log(log_user_in);
+            if (log_user_in.status === 200) {
                 document.querySelector(".css_file").setAttribute("href", "./css/quiz.css");
-                quiz_BGM.play();
+                setTimeout(play_sound, 200, quiz_BGM);
                 get_all_dogs();
                 document.querySelector("#logout_text").textContent = `${window.localStorage.username}`;
             };
