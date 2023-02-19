@@ -1,5 +1,7 @@
 "use strict"
 
+// FORTSÄTT I QUIZ RAD 25!
+
 /*
 Skapa designen först för varje sida genom att lägga alla HTML-element som behöver finnas och de som ej behöver synas
 och synas beroende på vilken class det är som aktiverat.

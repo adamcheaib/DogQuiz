@@ -1,5 +1,8 @@
 "use strict"
 
+// FORTSÄTT I QUIZ RAD 25!
+
+
 document.querySelector("#logout > button").addEventListener("click", logout_user);
 
 function get_wrong_dogs() {
@@ -23,45 +26,76 @@ function get_wrong_dogs() {
 
 async function get_all_dogs() {
 
+    // KLURA UT VARFÖR RANDOM_DOG BLIR ANNORLUNDA I FUNKTIONEN!!!!
+
     loading_alert("Fetching image...");
 
-    const correct_dog = await get_correct_dog();
-    get_wrong_dogs();
+    const random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
+    console.log(random_dog);
+    console.log(random_dog);
+    console.log(random_dog);
 
-    const correct_choice = document.querySelector("#choices > :not(.wrong)");
-    correct_choice.textContent = correct_dog.dog_name;
-    correct_choice.classList.add("correct");
+    const fetching_dog = await get_correct_dog("dog", random_dog);
 
-
-    document.querySelector("#dog_image").style.backgroundImage = `url(${correct_dog.background_link})`;
-    document.querySelector("#dog_image").style.backgroundSize = "cover";
-    document.querySelector("#dog_image").style.backgroundPosition = "center";
-
-    remove_alert();
-
-    document.querySelectorAll(".alternative").forEach(item => item.addEventListener("click", check_answer));
-
-
-
-    function check_answer(event) {
-
-        if (event.target.textContent === correct_dog.dog_name) {
-            bingoo.play();
-            create_alert("correct answer");
-            document.querySelectorAll(".alternative").forEach(item => {
-                item.classList.remove("wrong");
-                item.classList.remove("correct");
-                item.removeEventListener("click", check_answer);
-            });
-        } else {
-            create_alert("wrong answer")
-            document.querySelectorAll(".alternative").forEach(item => {
-                item.classList.remove("wrong");
-                item.classList.remove("correct");
-                item.removeEventListener("click", check_answer);
-            });
-        };
+    if (fetching_dog.status === 418) {
+        remove_alert();
+        create_alert("error", fetching_dog.statusText);
+        get_all_dogs();
     };
+
+    if (fetching_dog.status === 200) {
+        get_wrong_dogs();
+        const correct_dog = await fetching_dog.json();
+        console.log(correct_dog);
+        console.log(random_dog);
+        // let dog_data = { background_link: correct_dog.message, dog_name: dog_object.name };
+
+
+
+
+        const correct_choice = document.querySelector("#choices > :not(.wrong)");
+        correct_choice.textContent = random_dog.name;
+        correct_choice.classList.add("correct");
+
+
+        document.querySelector("#dog_image").style.backgroundImage = `url(${correct_dog.message})`;
+        document.querySelector("#dog_image").style.backgroundSize = "cover";
+        document.querySelector("#dog_image").style.backgroundPosition = "center";
+
+        remove_alert();
+
+        document.querySelectorAll(".alternative").forEach(item => item.addEventListener("click", check_answer));
+
+
+        function check_answer(event) {
+
+            if (event.target.textContent === random_dog.name) {
+                bingoo.play();
+                create_alert("correct answer");
+                document.querySelectorAll(".alternative").forEach(item => {
+                    item.classList.remove("wrong");
+                    item.classList.remove("correct");
+                    item.removeEventListener("click", check_answer);
+                });
+            } else {
+                create_alert("wrong answer")
+                document.querySelectorAll(".alternative").forEach(item => {
+                    item.classList.remove("wrong");
+                    item.classList.remove("correct");
+                    item.removeEventListener("click", check_answer);
+                });
+            };
+        };
+
+    } else {
+        create_alert("error", fetching_dog.statusText);
+        get_all_dogs();
+    };
+
+
+
+
+
 };
 
 
@@ -74,6 +108,9 @@ function logout_user() {
     quiz_BGM.pause();
     rickroll.currentTime = 0;
     quiz_BGM.currentTime = 0;
+
+    username_field.value = "";
+    password_field.value = "";
 
     change_text_content("#user_interaction > span", "Let the magic begin");
     document.querySelector("#user_interaction > span").style.backgroundColor = "";

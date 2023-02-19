@@ -1,6 +1,7 @@
 "use strict"
 
-// FORTSÄTT RAD 255!
+username_field.value = "";
+password_field.value = "";
 
 /* GENERAL FUNCTIONS */
 
