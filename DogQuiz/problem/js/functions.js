@@ -124,7 +124,6 @@ async function register_user(username_value, password_value) {
 
     } catch (error) {
         console.log(error);
-        // register_user(username_value, password_value);
     }
 };
 
@@ -167,8 +166,6 @@ async function accountCheck(event) {
         password_field.value = "";
 
     } else {
-
-
 
         await login_user(username_field.value, password_field.value);
         // rickroll.pause();
@@ -228,12 +225,13 @@ async function get_all_dogs() {
 
 
     const random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
-
+    loading_alert("Fetching image...");
     async function get_correct_dog(dog_object) {
         document.querySelector("#dog_image").style.backgroundImage = `url(./media/logo.png)`;
-        // loading_alert("Fetching image..."); // FORTSÄTT HÄR
         try {
             let fetched_dog = await (await fetch(new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`))).json();
+            class_manipulation(".white_cover", "show_alert", "remove");
+            class_manipulation(".white_cover", "hide_alert", "add");
             get_wrong_dogs();
 
             document.querySelector("#dog_image").style.backgroundImage = `url(${fetched_dog.message})`;
@@ -246,6 +244,7 @@ async function get_all_dogs() {
             add_answer_check(dog_object);
         } catch (error) {
             console.log(error);
+            get_all_dogs();
         };
 
     };
