@@ -21,7 +21,7 @@ function class_manipulation(dom_reference, class_name, action) {
     };
 }
 
-function create_alert(status) {
+function create_alert(status, error_message) {
     document.querySelector(".white_cover > div").innerHTML = `<span class="response_popup_box"></span>
     <button class="popup_button "></button>`
     class_manipulation(".white_cover", "hide_alert", "remove");
@@ -42,6 +42,11 @@ function create_alert(status) {
         document.querySelector(".popup_button").addEventListener("click", answer_popup);
     }
 
+    if (status === "error") {
+        change_text_content(".white_cover > div", error_message);
+        change_text_content(".white_cover > div > button", "OK");
+    };
+
     function answer_popup(event) {
         class_manipulation(".white_cover", "show_alert", "remove");
         class_manipulation(".white_cover", "hide_alert", "add");
@@ -60,7 +65,7 @@ function loading_alert(content) {
     document.querySelector(".white_cover > div").style.border = "1px solid gray";
     document.querySelector(".white_cover > div").style.justifyContent = "center";
     document.querySelector(".white_cover > div").innerHTML = `<div>${content}</div>`;
-}
+};
 
 
 
@@ -84,6 +89,7 @@ function css_register_login_change(event) {
 
         class_manipulation("#wrapper", "to_registration_page", "edit")
         class_manipulation("#login_button", "register_now", "edit");
+        document.querySelector("#user_interaction > span").style.backgroundColor = "";
 
     } else {
 
@@ -96,6 +102,7 @@ function css_register_login_change(event) {
 
         class_manipulation("#login_button", "login_now", "edit");
         class_manipulation("#wrapper", "to_login_page", "edit");
+        document.querySelector("#user_interaction > span").style.backgroundColor = "";
 
     };
 };
@@ -105,8 +112,16 @@ async function register_user(username_value, password_value) {
     try {
         const user_to_register = { action: "register", user_name: username_value, password: password_value };
         const user_to_send = { method: "POST", headers: { "Content-type": "application/json; charset=UTF-8" }, body: JSON.stringify(user_to_register) };
-        const fly_away_user = await (await fetch(new Request(`https://teaching.maumt.se/apis/access/`, user_to_send))).json();
-        return fly_away_user;
+        const fly_away_user = await fetch(new Request(`https://teaching.maumt.se/apis/access/`, user_to_send));
+        console.log(fly_away_user);
+        const user_returned = await fly_away_user.json();
+        console.log(user_returned);
+
+        if (!fly_away_user.ok) {
+            document.querySelector("#user_interaction > span").style.backgroundColor = "red";
+            change_text_content("#user_interaction > span", "Username already taken");
+        };
+
     } catch (error) {
         console.log(error);
         // register_user(username_value, password_value);
@@ -128,11 +143,13 @@ async function login_user(username_value, password_value) {
             get_all_dogs()
             class_manipulation(".white_cover", "hide_alert", "add");
             class_manipulation(".white_cover", "show_alert", "remove");
-            // alert("Logged in!");
-            // create_alert(0, 0, 0, "login success");
             document.querySelector(".css_file").setAttribute("href", "./css/quiz.css");
-
-        }
+        } else {
+            change_text_content("#user_interaction > span", "Wrong username or password");
+            document.querySelector("#user_interaction > span").style.backgroundColor = "red";
+            class_manipulation(".white_cover", "show_alert", "remove");
+            class_manipulation(".white_cover", "hide_alert", "add");
+        };
     } catch (error) {
         console.log(error);
     }
