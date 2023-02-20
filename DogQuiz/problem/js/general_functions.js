@@ -172,23 +172,21 @@ async function click_to_play(event) {
 
     if (window.localStorage.length === 2) {
         clickSound.play();
-        await fetch_data("get", "");
+        let attempt_relogin = await fetch_data("check login", "");
 
+        if (attempt_relogin.status === 200) {
+            document.querySelector(".css_file").setAttribute("href", "./css/quiz.css");
+            setTimeout(play_sound, 200, quiz_BGM);
+            get_all_dogs();
+            document.querySelector("#logout_text").textContent = `${window.localStorage.username}`;
+        };
 
+        if (attempt_relogin.status === 418) {
+            create_alert("error", attempt_relogin.statusText);
+        };
 
-        // try {
-        //     let log_user_in = await fetch(new Request(`https://www.teaching.maumt.se/apis/access/?action=check_credentials&user_name=${window.localStorage.username}&password=${window.localStorage.password}`));
-        //     console.log(log_user_in);
-        //     if (log_user_in.status === 200) {
-        //         document.querySelector(".css_file").setAttribute("href", "./css/quiz.css");
-        //         setTimeout(play_sound, 200, quiz_BGM);
-        //         get_all_dogs();
-        //         document.querySelector("#logout_text").textContent = `${window.localStorage.username}`;
-        //     };
-        // } catch (error) {
-        //     create_alert("error", error.message);
-        // }
-    } else {
+    }
+    else {
         play_sound(clickSound);
         class_manipulation(".css_file", "introduction", "remove");
         class_manipulation(".css_file", "loggo_on", "add");

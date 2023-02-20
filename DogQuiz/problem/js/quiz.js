@@ -1,7 +1,5 @@
 "use strict"
 
-// FORTSÄTT I QUIZ RAD 25!
-
 
 document.querySelector("#logout > button").addEventListener("click", logout_user);
 
@@ -26,50 +24,48 @@ function get_wrong_dogs() {
 
 async function get_all_dogs() {
 
-    // KLURA UT VARFÖR RANDOM_DOG BLIR ANNORLUNDA I FUNKTIONEN!!!!
-
     loading_alert("Fetching image...");
 
     const random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
-    console.log(random_dog);
-    console.log(random_dog);
-    console.log(random_dog);
 
     const fetching_dog = await get_correct_dog("dog", random_dog);
 
-    if (fetching_dog.status === 418) {
+    if (fetching_dog.server_response.status === 418) {
         remove_alert();
         create_alert("error", fetching_dog.statusText);
         get_all_dogs();
     };
 
-    if (fetching_dog.status === 200) {
+    if (fetching_dog.server_response.status === 200) {
+        remove_alert();
         get_wrong_dogs();
-        const correct_dog = await fetching_dog.json();
-        console.log(correct_dog);
-        console.log(random_dog);
-        // let dog_data = { background_link: correct_dog.message, dog_name: dog_object.name };
+
+
+        const correct_dog_name = fetching_dog.dog_name;
+        console.log(correct_dog_name);
+        console.log(fetching_dog.server_response);
+        const dog_url = await fetching_dog.server_response.json();
+        console.log(dog_url.message)
 
 
 
 
         const correct_choice = document.querySelector("#choices > :not(.wrong)");
-        correct_choice.textContent = random_dog.name;
+        correct_choice.textContent = fetching_dog.dog_name;
         correct_choice.classList.add("correct");
 
 
-        document.querySelector("#dog_image").style.backgroundImage = `url(${correct_dog.message})`;
+        document.querySelector("#dog_image").style.backgroundImage = `url(${dog_url.message})`;
         document.querySelector("#dog_image").style.backgroundSize = "cover";
         document.querySelector("#dog_image").style.backgroundPosition = "center";
 
-        remove_alert();
 
         document.querySelectorAll(".alternative").forEach(item => item.addEventListener("click", check_answer));
 
 
         function check_answer(event) {
 
-            if (event.target.textContent === random_dog.name) {
+            if (event.target.textContent === correct_dog_name) {
                 bingoo.play();
                 create_alert("correct answer");
                 document.querySelectorAll(".alternative").forEach(item => {
@@ -115,9 +111,13 @@ function logout_user() {
     change_text_content("#user_interaction > span", "Let the magic begin");
     document.querySelector("#user_interaction > span").style.backgroundColor = "";
 
+
     setTimeout(
         play_sound, 2700, rickroll
     )
+
+    class_manipulation(".correct", "correct", "remove");
+    document.querySelectorAll(".wrong").forEach(item => item.classList.remove("wrong"));
 
 };
 

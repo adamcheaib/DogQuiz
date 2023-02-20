@@ -11,6 +11,8 @@ async function fetch_data(type, dog_object) {
 
     const dog_req = new Request(`https://dog.ceo/api/breed/${dog_object.url}/images/random`);
 
+    const sticky_login = new Request(`https://www.teaching.maumt.se/apis/access/?action=check_credentials&user_name=${window.localStorage.username}&password=${window.localStorage.password}`);
+
     if (type === "get") {
 
         try {
@@ -98,7 +100,8 @@ async function fetch_data(type, dog_object) {
     if (type === "dog") {
         try {
             let response = await fetch(dog_req);
-            return response;
+            let returner = { server_response: response, dog_name: dog_object.name }
+            return returner;
             // if (response.status === 200) {
             //     let resource = await response.json();
             //     let dog_data = { background_link: resource.message, dog_name: dog_object.name };
@@ -110,6 +113,12 @@ async function fetch_data(type, dog_object) {
             console.log(error);
             fetch_data("dog")
         };
+    };
+
+
+    if (type === "check login") {
+        let response_promise = await fetch(sticky_login);
+        return response_promise;
     };
 
 

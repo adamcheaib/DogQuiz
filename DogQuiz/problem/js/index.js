@@ -17,4 +17,5 @@ document.querySelector("#login_button").addEventListener("click", accountCheck);
 
 document.querySelector(".play_click").addEventListener("click", click_to_play);
 
-window.localStorage.clear();
+// window.localStorage.clear();
+
