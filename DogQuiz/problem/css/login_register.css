@@ -46,10 +46,9 @@ h1 {
 
 #user_interaction>p {
     text-decoration-line: underline;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     text-align: center;
     user-select: none;
-    margin-top: 2rem;
 }
 
 #user_interaction>p:hover {
@@ -67,6 +66,12 @@ h1 {
     user-select: none;
 }
 
+.input_fields>input {
+    height: 1.3rem;
+    font-size: 1.2rem;
+    font-family: "Roboto-Regular";
+}
+
 .input_fields {
     display: flex;
     flex-direction: column;
@@ -76,6 +81,7 @@ h1 {
 #login_button {
     text-align: center;
     font-size: 1.2rem;
+    height: 3.5rem;
 }
 
 #login_button:hover {
@@ -106,7 +112,7 @@ h1 {
     height: 20vh;
     width: 20vh;
     position: absolute;
-    top: 29%;
+    top: 24%;
     left: 50%;
     opacity: 0%;
     transform: translate(-58%, -50%);
