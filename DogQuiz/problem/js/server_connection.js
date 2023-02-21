@@ -20,37 +20,6 @@ async function fetch_data(type, dog_object) {
             console.log(response_promise);
             return response_promise;
 
-            // if (response_promise.status === 418) {
-            //     create_alert("error", response_promise.statusText);
-            // };
-
-            // if (response_promise.status === 404) {
-            //     document.querySelector("#user_interaction > span").textContent = "Wrong username or password";
-            //     document.querySelector("#user_interaction > span").style.backgroundColor = "red";
-            //     remove_alert();
-            // };
-
-            // if (response_promise.status === 200) {
-            //     // let resource = await response_promise.json();
-            //     remove_alert();
-
-            //     window.localStorage.setItem("password", resource.data.password);
-            //     window.localStorage.setItem("username", resource.data.user_name);
-
-            //     document.querySelector(".css_file").setAttribute("href", "./css/quiz.css");
-            //     document.querySelector("#logout_text").textContent = window.localStorage.getItem("username");
-
-            //     // get_all_dogs();
-
-            //     rickroll.pause();
-            //     rickroll.currentTime = 0;
-            //     quiz_BGM.currentTime = 0;
-            //     quiz_BGM.play();
-
-            //     return resource;
-
-            // };
-
         } catch (error) {
             create_alert("error", error.message);
         };
@@ -102,13 +71,6 @@ async function fetch_data(type, dog_object) {
             let response = await fetch(dog_req);
             let returner = { server_response: response, dog_name: dog_object.name }
             return returner;
-            // if (response.status === 200) {
-            //     let resource = await response.json();
-            //     let dog_data = { background_link: resource.message, dog_name: dog_object.name };
-            //     return dog_data;
-            // } else {
-            //     create_alert("error", response.statusText);
-            // }
         } catch (error) {
             console.log(error);
             fetch_data("dog")
@@ -123,11 +85,3 @@ async function fetch_data(type, dog_object) {
 
 
 };
-
-// LÄGG TILL I QUIZ.JS
-
-// async function get_correct_dog() {
-//     const random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
-//     let correct_dog = await fetch_data("dog", random_dog);
-//     return correct_dog;
-// };

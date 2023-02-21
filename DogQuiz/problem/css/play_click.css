@@ -105,6 +105,12 @@
     background-color: white;
 }
 
+.loading_icon {
+    animation-name: loading_icon;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
 @keyframes textAppear {
     0% {
         opacity: 30%

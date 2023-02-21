@@ -27,6 +27,7 @@ function class_manipulation(dom_reference, class_name, action) {
 function create_alert(status, error_message) {
     document.querySelector(".white_cover > div").innerHTML = `<span class="response_popup_box"></span>
     <button class="popup_button "></button>`
+
     class_manipulation(".white_cover", "hide_alert", "remove");
     class_manipulation(".white_cover", "show_alert", "add");
 
@@ -34,6 +35,7 @@ function create_alert(status, error_message) {
     if (status === "correct answer") {
         change_text_content(".response_popup_box", "CORRECT!");
         change_text_content(".popup_button", "ONE MORE");
+
         document.querySelector(".white_cover > div").style.backgroundColor = "lightgreen";
         document.querySelector(".popup_button").addEventListener("click", new_dogs_after_answer);
     };
@@ -41,6 +43,7 @@ function create_alert(status, error_message) {
     if (status === "wrong answer") {
         change_text_content(".response_popup_box", "WRONG! :(");
         change_text_content(".popup_button", "ONE MORE");
+
         document.querySelector(".white_cover > div").style.backgroundColor = "darkred";
         document.querySelector(".popup_button").addEventListener("click", new_dogs_after_answer);
     }
@@ -48,11 +51,15 @@ function create_alert(status, error_message) {
     if (status === "error") {
         class_manipulation(".white_cover", "show_alert", "add");
         class_manipulation(".white_cover", "hide_alert", "remove");
+
         document.querySelector(".white_cover > div").innerHTML = `<span class="response_popup_box" style="font-size: 1.4rem">${error_message}</span>
         <button class="popup_button" style="font-size: 1.5rem">CLOSE</button>`;
+
         document.querySelector(".white_cover > div").style.backgroundColor = "white";
         document.querySelector(".white_cover > div").style.gap = "40px";
+
         document.querySelector(".popup_button").addEventListener("click", close_popup_box);
+
         username_field.value = "";
         password_field.value = "";
     };
@@ -64,8 +71,11 @@ function create_alert(status, error_message) {
 
     function new_dogs_after_answer(event) {
         close_popup_box(event);
+
         document.querySelectorAll(".alternative").forEach(item => item.textContent = "");
+
         event.target.removeEventListener("click", new_dogs_after_answer);
+
         get_all_dogs();
     };
 };
