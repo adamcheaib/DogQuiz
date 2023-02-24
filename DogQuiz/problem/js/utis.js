@@ -146,24 +146,7 @@ function css_register_login_change(event) {
 
 
 
-
-
-
-/* QUIZ PART */
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* MISC FUNCTIONS */
+/* MISC. FUNCTIONS */
 
 function audio_picker(source) {
     let new_audio = document.querySelector(source)

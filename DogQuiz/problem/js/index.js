@@ -1,10 +1,9 @@
 "use strict"
 
-// FORTSÄTT I QUIZ RAD 25!
-
 /*
-Skapa designen först för varje sida genom att lägga alla HTML-element som behöver finnas och de som ej behöver synas
-och synas beroende på vilken class det är som aktiverat.
+KVAR ATT GÖRA:
+- Ändra från flera if-statements till Switch-Case.
+- Ändra från en bakgrundsbild till en img-element så att storleken är dynamisk.
 */
 
 
