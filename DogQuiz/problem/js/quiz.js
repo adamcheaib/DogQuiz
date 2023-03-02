@@ -4,20 +4,20 @@
 document.querySelector("#logout > button").addEventListener("click", logout_user);
 
 function get_wrong_dogs() {
-    const three_alternatives = document.querySelectorAll(".alternative");
+    const three_wrong_alternatives = document.querySelectorAll(".alternative");
     const index_numbers = [];
 
     while (3 > index_numbers.length) {
-        let random_number = Math.floor(Math.random() * three_alternatives.length);
+        let random_number = Math.floor(Math.random() * three_wrong_alternatives.length);
         if (!index_numbers.includes(random_number)) {
             index_numbers.push(random_number);
         };
     };
 
     index_numbers.forEach(number => {
-        three_alternatives[number].classList.add("wrong");
+        three_wrong_alternatives[number].classList.add("wrong");
         const wrong_random_dog = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
-        three_alternatives[number].textContent = wrong_random_dog.name;
+        three_wrong_alternatives[number].textContent = wrong_random_dog.name;
     });
 };
 
