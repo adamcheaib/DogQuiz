@@ -52,9 +52,7 @@ async function get_all_dogs() {
         correct_choice.classList.add("correct");
 
 
-        document.querySelector("#dog_image").style.backgroundImage = `url(${dog_url.message})`;
-        document.querySelector("#dog_image").style.backgroundSize = "cover";
-        document.querySelector("#dog_image").style.backgroundPosition = "center";
+        document.querySelector("#dog_image").src = dog_url.message;
 
 
         document.querySelectorAll(".alternative").forEach(item => item.addEventListener("click", check_answer));
