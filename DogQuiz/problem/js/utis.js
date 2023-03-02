@@ -12,21 +12,21 @@ function change_text_content(css_selector, content) {
 
 function class_manipulation(dom_reference, class_name, action) {
     if (action === "add") {
-        document.querySelector(dom_reference).classList.add(class_name)
+        document.querySelector(dom_reference).classList.add(class_name);
     };
 
     if (action === "remove") {
-        document.querySelector(dom_reference).classList.remove(class_name)
-    }
+        document.querySelector(dom_reference).classList.remove(class_name);
+    };
 
     if (action === "edit") {
-        document.querySelector(dom_reference).className = class_name
+        document.querySelector(dom_reference).className = class_name;
     };
 }
 
 function create_alert(status, error_message) {
     document.querySelector(".white_cover > div").innerHTML = `<span class="response_popup_box"></span>
-    <button class="popup_button "></button>`
+    <button class="popup_button "></button>`;
 
     class_manipulation(".white_cover", "hide_alert", "remove");
     class_manipulation(".white_cover", "show_alert", "add");
@@ -46,7 +46,7 @@ function create_alert(status, error_message) {
 
         document.querySelector(".white_cover > div").style.backgroundColor = "darkred";
         document.querySelector(".popup_button").addEventListener("click", new_dogs_after_answer);
-    }
+    };
 
     if (status === "error") {
         class_manipulation(".white_cover", "show_alert", "add");
@@ -149,8 +149,8 @@ function css_register_login_change(event) {
 /* MISC. FUNCTIONS */
 
 function audio_picker(source) {
-    let new_audio = document.querySelector(source)
-    return new_audio
+    let new_audio = document.querySelector(source);
+    return new_audio;
 };
 
 function play_sound(sound) {

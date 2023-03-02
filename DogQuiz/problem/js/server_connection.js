@@ -55,7 +55,7 @@ async function fetch_data(type, dog_object) {
 
             if (response.status === 200) {
                 create_alert("error", `Registration ${response.statusText}`);
-            }
+            };
 
         } catch (error) {
             create_alert("error", error.message);
@@ -66,10 +66,10 @@ async function fetch_data(type, dog_object) {
     if (type === "dog") {
         try {
             let response = await fetch(dog_req);
-            let returner = { server_response: response, dog_name: dog_object.name }
+            let returner = { server_response: response, dog_name: dog_object.name };
             return returner;
         } catch (error) {
-            fetch_data("dog")
+            fetch_data("dog");
         };
     };
 

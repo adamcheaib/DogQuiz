@@ -33,8 +33,6 @@ async function login_user() {
         document.querySelector(".css_file").setAttribute("href", "./css/quiz.css");
         document.querySelector("#logout_text").textContent = window.localStorage.getItem("username");
 
-        // get_all_dogs();
-
         rickroll.pause();
         rickroll.currentTime = 0;
         quiz_BGM.currentTime = 0;
