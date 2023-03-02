@@ -29,7 +29,6 @@ async function login_user() {
         window.localStorage.setItem("password", resource.data.password);
         window.localStorage.setItem("username", resource.data.user_name);
 
-        console.log(window.localStorage);
 
         document.querySelector(".css_file").setAttribute("href", "./css/quiz.css");
         document.querySelector("#logout_text").textContent = window.localStorage.getItem("username");

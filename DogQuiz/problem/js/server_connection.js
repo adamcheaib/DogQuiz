@@ -17,7 +17,6 @@ async function fetch_data(type, dog_object) {
 
         try {
             let response_promise = await fetch(get_req);
-            console.log(response_promise);
             return response_promise;
 
         } catch (error) {
@@ -43,8 +42,6 @@ async function fetch_data(type, dog_object) {
 
             let response = await fetch(post_req, options);
             let resource = await response.json();
-            console.log(response);
-            console.log(resource);
 
             remove_alert();
 
@@ -72,7 +69,6 @@ async function fetch_data(type, dog_object) {
             let returner = { server_response: response, dog_name: dog_object.name }
             return returner;
         } catch (error) {
-            console.log(error);
             fetch_data("dog")
         };
     };

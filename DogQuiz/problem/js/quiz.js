@@ -42,10 +42,7 @@ async function get_all_dogs() {
 
 
         const correct_dog_name = fetching_dog.dog_name;
-        console.log(correct_dog_name);
-        console.log(fetching_dog.server_response);
         const dog_url = await fetching_dog.server_response.json();
-        console.log(dog_url.message)
 
 
 
@@ -98,7 +95,6 @@ async function get_all_dogs() {
 function logout_user() {
 
     window.localStorage.clear();
-    console.log(window.localStorage);
 
     document.querySelector(".css_file").setAttribute("href", "./css/login_register.css");
     quiz_BGM.pause();
