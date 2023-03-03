@@ -5,8 +5,6 @@ async function register_user() {
     await fetch_data("post", "");
 };
 
-
-
 async function login_user() {
     loading_alert("Contacting server...");
     let response_promise = await fetch_data("get", "");

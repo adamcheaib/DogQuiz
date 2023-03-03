@@ -66,8 +66,8 @@ async function fetch_data(type, dog_object) {
     if (type === "dog") {
         try {
             let response = await fetch(dog_req);
-            let returner = { server_response: response, dog_name: dog_object.name };
-            return returner;
+            let to_be_returned = { server_response: response, dog_name: dog_object.name };
+            return to_be_returned;
         } catch (error) {
             fetch_data("dog");
         };
